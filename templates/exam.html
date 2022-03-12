@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考试题目</title>
+</head>
+  <script type="text/javascript" src="{{url_for('static', filename='jquery-2.0.3.js')}}"></script>
+<script language="JavaScript">
+    if({{ flag }} == 1) {
+        alert("答题错误，正确答案为: {{ result }}. {{ resultstr }}");
+    }
+</script>
+<script language="JavaScript">
+    function subData(){
+      var price = "";
+    $("input[name='choice1']:checked").each(function (i){
+        if(0==i){
+            price = $(this).val();
+        }
+        else{
+            price += $(this).val();
+        }
+    });
+    var lastlink = "{{url_for('exam',page=pagination.page-1)}}&value="+price;
+    var nextlink = "{{url_for('exam',page=pagination.page+1)}}&value="+price;
+    $("#last").attr("href",lastlink);
+    $("#next").attr("href",nextlink)
+  }
+</script>
+<body>
+ <form action="" method="post" class="validate"  id="form">
+  <table>
+          <tr>
+             <td><H4>{{ data[1] }}</H4></td>
+          </tr>
+      <tr>
+             <td><label>
+                 {% if  data[2]|length  ==1 %}
+                 <input type="radio" name="choice1" value="A" onclick="subData()">
+                 {% else %}
+                  <input type="checkbox" name="choice1" value="A" onclick="subData()">
+                 {% endif %}
+             </label>A. {{ data[6] }}</td>
+      </tr>
+              <tr>
+             <td><label>
+                 {% if data[2]|length ==1 %}
+                 <input type="radio" name="choice1" value="B" onclick="subData()">
+                 {% else %}
+                  <input type="checkbox" name="choice1" value="B" onclick="subData()">
+                 {% endif %}
+             </label>B. {{ data[7] }}</td>
+              </tr>
+
+      {% if data[8] != "" %}
+              <tr>
+
+             <td><label>
+                   {% if data[2]|length ==1 %}
+                 <input type="radio" name="choice1" value="C" onclick="subData()">
+                 {% else %}
+                  <input type="checkbox" name="choice1" value="C" onclick="subData()">
+                 {% endif %}
+             </label>C. {{ data[8] }}</td>
+              </tr>
+      {% endif %}
+      {% if data[9] != "" %}
+              <tr>
+             <td><label>
+                 {% if data[2]|length ==1 %}
+                 <input type="radio" name="choice1" value="D" onclick="subData()">
+                 {% else %}
+                  <input type="checkbox" name="choice1" value="D" onclick="subData()">
+                 {% endif %}
+             </label>D. {{ data[9] }}</td>
+              </tr>
+{% endif %}
+  </table>
+           <br>
+
+  {%if pagination.has_prev%}
+        <a class="page-link" href="{{url_for('exam',page=pagination.page-1)}}" id="last">上一题</a>
+        {%else%}
+        <a class="page-link" href="#">上一题</a>
+        {%endif%}
+ &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp
+        {%if pagination.has_next%}
+         <a class="page-link" href="{{url_for('exam',page=pagination.page+1)}}" id="next">下一题</a>
+        {%else%}
+         <a class="page-link" href="#"></a>
+        {%endif%}
+
+  &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp  &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp
+ 当前题：{{ pagination.page  }}
+
+   &nbsp&nbsp&nbsp &nbsp
+ 总题数：{{ pagination.total  }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp
+     <a class="page-link" href="{{url_for('result')}}">提交结果</a>
+       &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp
+     <a class="page-link" href="{{url_for('index')}}">返回首页</a>
+  </form>
+
+</body>
+</html>

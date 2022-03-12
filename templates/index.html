@@ -1,0 +1,38 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<style type="text/css">
+        .tree li {
+            padding: 5px 0;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+<body>
+<div class="block-body">
+    <H2>请选择考试题目类型:</H2></br>
+          <form action="" method="post" class="validate"  id="form">
+        <div>
+            <input type="radio" name="examtype" value="1" checked> 危害因素辨识题库</br>
+            <input type="radio" name="examtype" value="2"> 采油初级题库</br>
+            <input type="radio" name="examtype" value="3"> 采油中级题库</br>
+            <input type="radio" name="examtype" value="4"> 采油高级题库</br>
+            <input type="radio" name="examtype" value="5"> 采油技师题库</br></br>
+
+            </p>
+        </div>
+        <div>
+            请选择出题方式:
+            <input type="radio" name="order" value="1" checked>顺序
+            <input type="radio" name="order" value="2">随机
+        </div>
+              <div>
+            请选择题目数量:</br>
+           开始题目: <input type="text" name="startnum" value="0">
+                  结束题目: <input type="text" name="endnum" value="100">
+        </div></br>
+              <input type="submit" value="开始考试" >
+    </form>
+</div>
+
+</body>
+</html>
